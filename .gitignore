@@ -1,0 +1,20 @@
+# Secrets — never commit
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+
+# Generated output (PNGs, content.json, writeups)
+output/
+renderer/output/
+
+# macOS
+.DS_Store
+
+# Source archive (we extracted it into renderer/)
+infographic-system.tar.gz

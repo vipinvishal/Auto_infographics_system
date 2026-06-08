@@ -1,0 +1,48 @@
+name: VipinAIHub Daily Infographic
+
+on:
+  schedule:
+    - cron: '0 1 * * *'    # 06:30 AM IST (01:00 UTC)
+  workflow_dispatch:
+    # Manual "Run workflow" button in the Actions tab
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # needed to commit last_story.txt back to the repo
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Cache pip dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Install Playwright + Chromium
+        run: playwright install --with-deps chromium
+
+      - name: Generate infographic and email it
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+        run: python check_trends.py
+
+      - name: Commit updated last_story.txt
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add last_story.txt
+          git diff --staged --quiet || git commit -m "chore: update processed story ids"
+          git push
