@@ -51,7 +51,8 @@ def _slugify(text: str, max_len: int = 40) -> str:
     return slug[:max_len] or "infographic"
 
 
-def run_pipeline(article_text: str, topic_title: str, source: str = "") -> dict:
+def run_pipeline(article_text: str, topic_title: str, source: str = "",
+                 avoid_topics: list[str] | None = None) -> dict:
     result = {
         "success": False, "topic": topic_title, "output_dir": "",
         "png_path": "", "email_sent": False, "error": None,
@@ -65,7 +66,7 @@ def run_pipeline(article_text: str, topic_title: str, source: str = "") -> dict:
     # 1. Content JSON
     logger.info("[1/4] Generating infographic content via OpenRouter …")
     try:
-        content = content_api.get_content(article_text, topic_title, source)
+        content = content_api.get_content(article_text, topic_title, source, avoid_topics)
     except RuntimeError as exc:
         result["error"] = f"Content generation failed: {exc}"
         logger.error(result["error"])

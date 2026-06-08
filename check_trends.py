@@ -25,18 +25,35 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-def _recent_ids() -> list[str]:
-    if os.path.exists(config.LAST_STORY_FILE):
-        return [ln.strip() for ln in open(config.LAST_STORY_FILE) if ln.strip()]
+TOPICS_FILE = "topics_history.txt"
+
+
+def _read_lines(path: str) -> list[str]:
+    if os.path.exists(path):
+        return [ln.strip() for ln in open(path, encoding="utf-8") if ln.strip()]
     return []
 
 
-def _record_id(story_id: str, keep: int = 30) -> None:
-    ids = _recent_ids()
-    ids.append(story_id)
+def _recent_ids() -> list[str]:
+    return _read_lines(config.LAST_STORY_FILE)
+
+
+def _recent_topics() -> list[str]:
+    return _read_lines(TOPICS_FILE)
+
+
+def _record_id(story_id: str, keep: int = 300) -> None:
+    ids = _recent_ids() + [story_id]
     with open(config.LAST_STORY_FILE, "w") as fh:
         fh.write("\n".join(ids[-keep:]) + "\n")
     logger.info("Recorded story id: %s", story_id)
+
+
+def _record_topic(topic: str, keep: int = 200) -> None:
+    topics = _recent_topics() + [topic]
+    with open(TOPICS_FILE, "w", encoding="utf-8") as fh:
+        fh.write("\n".join(topics[-keep:]) + "\n")
+    logger.info("Recorded topic: %s", topic)
 
 
 def main() -> int:
@@ -64,9 +81,13 @@ def main() -> int:
         logger.warning("No article text — using headline only.")
         article_text = f"Trending AI topic: {story['title']}\nSource: {story['url']}"
 
-    result = run_pipeline(article_text, story["title"], source=story["source"])
+    # Last 40 covered concepts steer the LLM away from repeats.
+    avoid_topics = _recent_topics()[-40:]
+    result = run_pipeline(article_text, story["title"],
+                          source=story["source"], avoid_topics=avoid_topics)
     if result["success"]:
         _record_id(story["id"])
+        _record_topic(result["topic"])
         logger.info("Done. Email sent: %s", result["email_sent"])
         return 0
 

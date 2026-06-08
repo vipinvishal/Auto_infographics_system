@@ -25,7 +25,8 @@ _SYSTEM = """You are an AI/Tech educator who designs single-image explainer info
 You take a trending AI / Generative-AI / Agentic-AI story and reframe it into ONE
 evergreen "how it works" concept that can be explained in exactly 3 visual stages.
 You ONLY cover Artificial Intelligence, Generative AI, or Agentic AI — never plain
-cloud, devops, or unrelated tech. You return valid JSON only: no markdown, no prose."""
+cloud, devops, or unrelated tech. Write ALL text in ENGLISH ONLY (no Hindi/Hinglish).
+You return valid JSON only: no markdown, no prose."""
 
 _USER_TEMPLATE = """TRENDING AI STORY (your inspiration, not the literal subject):
 Title: "{title}"
@@ -42,8 +43,12 @@ Reframe this into ONE evergreen, teachable AI concept that fits a 3-stage
 the news headline (e.g. a story about a new agent framework → "How an AI Agent
 Decides Its Next Action"; a story about RAG → "How RAG Answers Your Question").
 
+ALREADY COVERED — pick a DIFFERENT, fresh concept than any of these:
+{avoid}
+
 HARD RULES
 - Topic MUST be about AI, Generative AI, or Agentic AI. Nothing else.
+- The "topic" MUST be clearly distinct from every "already covered" concept above.
 - EXACTLY 3 stages and EXACTLY 3 explainers.
 - Every value concrete and specific — no filler like "AI is powerful".
 - stage.title <= 22 characters. stage.subtitle <= 30 characters, one line.
@@ -130,11 +135,16 @@ def _coerce(data: dict) -> dict:
     return data
 
 
-def get_content(article_text: str, topic_title: str, source: str = "") -> dict:
-    """Generate validated infographic content JSON from a story."""
+def get_content(article_text: str, topic_title: str, source: str = "",
+                avoid_topics: list[str] | None = None) -> dict:
+    """Generate validated infographic content JSON from a story.
+
+    avoid_topics: recently-used concepts to steer away from, so we never repeat.
+    """
     article = (article_text or "").strip()[:5500] or topic_title
+    avoid = "\n".join(f"- {t}" for t in (avoid_topics or [])) or "- (none yet)"
     prompt = _USER_TEMPLATE.format(
-        title=topic_title, source=source, article=article, icons=_ICONS,
+        title=topic_title, source=source, article=article, icons=_ICONS, avoid=avoid,
     )
 
     last_err = ""

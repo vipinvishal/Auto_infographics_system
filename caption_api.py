@@ -13,9 +13,10 @@ import openrouter_client as orc
 
 logger = logging.getLogger(__name__)
 
-_SYSTEM = """You write social captions for @VipinAIHub, an AI-education creator from India.
-Tone: smart friend explaining AI, light Hinglish, zero corporate filler.
-You return plain text only — the exact words to copy-paste. No JSON, no preamble."""
+_SYSTEM = """You write social captions for @VipinAIHub, an AI-education creator.
+Write in ENGLISH ONLY — clear, simple, conversational English. Do NOT use Hindi,
+Hinglish, or any other language. Tone: a smart friend explaining AI, zero corporate
+filler. Return plain text only — the exact words to copy-paste. No JSON, no preamble."""
 
 _USER_TEMPLATE = """The infographic explains this AI concept: "{topic}"
 
