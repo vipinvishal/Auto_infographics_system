@@ -67,6 +67,8 @@ def render(content_path, out_path):
     content = json.loads(pathlib.Path(content_path).read_text())
     html = build_html(content)
     tmp_html = ROOT / "output" / "_tmp.html"
+    tmp_html.parent.mkdir(parents=True, exist_ok=True)   # gitignored dir; create on fresh checkouts (CI)
+    pathlib.Path(out_path).parent.mkdir(parents=True, exist_ok=True)
     tmp_html.write_text(html)
 
     with sync_playwright() as p:
