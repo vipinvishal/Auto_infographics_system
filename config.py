@@ -32,9 +32,9 @@ OPENROUTER_BASE_URL: str = "https://openrouter.ai/api/v1"
 # Model per pipeline step. Swap these strings to change models — no code change.
 #   * append ":online" to ANY model to turn on OpenRouter web search.
 #   * DISCOVERY model reframes a trending story into an evergreen explainer.
-DISCOVERY_MODEL: str = os.environ.get("DISCOVERY_MODEL", "x-ai/grok-2-1212")
-CONTENT_MODEL:   str = os.environ.get("CONTENT_MODEL",   "google/gemini-2.0-flash-001")
-CAPTION_MODEL:   str = os.environ.get("CAPTION_MODEL",   "google/gemini-2.0-flash-001")
+DISCOVERY_MODEL: str = os.environ.get("DISCOVERY_MODEL", "x-ai/grok-4.3")
+CONTENT_MODEL:   str = os.environ.get("CONTENT_MODEL",   "google/gemini-2.5-flash")
+CAPTION_MODEL:   str = os.environ.get("CAPTION_MODEL",   "google/gemini-2.5-flash")
 
 # Optional headers OpenRouter uses for attribution / rankings.
 OPENROUTER_REFERER: str = "https://github.com/vipinvishal"
