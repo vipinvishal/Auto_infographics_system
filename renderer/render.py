@@ -46,6 +46,20 @@ def autofit(page):
         while (h.scrollWidth > col.clientWidth && hs > 30) {
             hs -= 1; h.style.fontSize = hs + 'px';
         }
+        // shrink sticky-note / terminal text until it fits its box
+        // (no horizontal overflow and a sane max height so notes never clip)
+        document.querySelectorAll('.sticky').forEach(el => {
+            const maxH = el.classList.contains('term') ? 78 : 96;
+            let size = parseFloat(getComputedStyle(el).fontSize);
+            const inner = el.querySelector('.cmd') || el;   // shrink the cmd line if present
+            let isz = parseFloat(getComputedStyle(inner).fontSize);
+            while ((el.scrollWidth > el.clientWidth || el.scrollHeight > maxH)
+                   && size > 9) {
+                size -= 1; isz -= 1;
+                el.style.fontSize = size + 'px';
+                if (inner !== el) inner.style.fontSize = Math.max(isz, 8) + 'px';
+            }
+        });
     }""")
 
 

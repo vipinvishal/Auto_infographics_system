@@ -53,7 +53,9 @@ HARD RULES
   <span class='k3'>..</span> to highlight a key term, and <b>..</b> for bold.
 - quote_main may use <span class='n'>NUMBER</span> and <span class='h'>highlight</span>.
 - handle MUST be exactly "@VipinAIHub".
-- terminal_cmd is a short, real-looking shell/CLI line related to the topic.
+- terminal_cmd is a short, real-looking shell/CLI line, <= 18 chars, ideally
+  one token (e.g. "agent.run()", "rag.query()", "aws s3 cp"). No long arguments.
+- sticky1 and sticky2 are <= 7 words each.
 
 Return a single JSON object with EXACTLY these keys:
 {{
