@@ -12,3 +12,4 @@ AI Model Guardrails
 AI Trust & Safety Data Retention
 AI Agent Accountability
 AI Agent Resource Management
+AI Agent Self-Extension
