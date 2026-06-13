@@ -14,3 +14,4 @@ AI Agent Accountability
 AI Agent Resource Management
 AI Agent Self-Extension
 Open-Source AI Development
+AI-Driven Project Funding
