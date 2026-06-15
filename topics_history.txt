@@ -20,3 +20,4 @@ How AI Model Alignment Works
 AI-Assisted Evidence Generation
 AI Compute Blending
 AI Adoption Barriers
+Local AI for Media Indexing
