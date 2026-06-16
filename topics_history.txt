@@ -24,3 +24,4 @@ Local AI for Media Indexing
 Universal AI Model API
 Local LLM Optimization
 AI Model Merging
+AI-Assisted GitOps
