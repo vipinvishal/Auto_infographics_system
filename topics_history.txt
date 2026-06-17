@@ -26,3 +26,4 @@ Local LLM Optimization
 AI Model Merging
 AI-Assisted GitOps
 AI as a Knowledge Interface
+Sovereign AI Model Development
