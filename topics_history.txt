@@ -25,3 +25,4 @@ Universal AI Model API
 Local LLM Optimization
 AI Model Merging
 AI-Assisted GitOps
+AI as a Knowledge Interface
