@@ -32,3 +32,4 @@ AI-Powered Medical Diagnostics
 AI Model Geopolitical Segmentation
 AI-Enhanced Software Development Lifecycle
 Multimodal AI Vision
+AI Model Quantization
