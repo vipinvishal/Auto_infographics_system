@@ -34,3 +34,4 @@ AI-Enhanced Software Development Lifecycle
 Multimodal AI Vision
 AI Model Quantization
 How Transformer Attention Works
+AI-Assisted Learning Design
