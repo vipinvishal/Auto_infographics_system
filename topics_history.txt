@@ -37,3 +37,4 @@ How Transformer Attention Works
 AI-Assisted Learning Design
 Enterprise AI Access Control
 AI Model Uncertainty Calibration
+Agentic Deployment
