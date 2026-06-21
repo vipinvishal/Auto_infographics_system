@@ -38,3 +38,4 @@ AI-Assisted Learning Design
 Enterprise AI Access Control
 AI Model Uncertainty Calibration
 Agentic Deployment
+AI-Assisted Code Review
