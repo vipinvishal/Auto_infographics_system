@@ -40,3 +40,4 @@ AI Model Uncertainty Calibration
 Agentic Deployment
 AI-Assisted Code Review
 Modular AI Architecture
+AI-Assisted Identity Verification
