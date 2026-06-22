@@ -42,3 +42,4 @@ AI-Assisted Code Review
 Modular AI Architecture
 AI-Assisted Identity Verification
 AI Model Distillation
+AI Agent Auditability
