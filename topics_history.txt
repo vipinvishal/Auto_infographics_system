@@ -43,3 +43,4 @@ Modular AI Architecture
 AI-Assisted Identity Verification
 AI Model Distillation
 AI Agent Auditability
+LLM Fine-Tuning for Classification
