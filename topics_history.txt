@@ -54,3 +54,4 @@ AI Model Output Distillation
 Unified AI API Abstraction
 Human-in-the-Loop AI Training
 Local-First AI Knowledge Management
+Local AI Hardware Acceleration
