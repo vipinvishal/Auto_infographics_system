@@ -52,3 +52,4 @@ Collaborative AI Context Building
 AI Hardware Optimization
 AI Model Output Distillation
 Unified AI API Abstraction
+Human-in-the-Loop AI Training
